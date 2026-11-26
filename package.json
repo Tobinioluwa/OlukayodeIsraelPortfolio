@@ -2,8 +2,20 @@
   "name": "motion-portfolio",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.9.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "overrides": {
+    "zod": "^4.6.6"
   }
 }

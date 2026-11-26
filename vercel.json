@@ -1,0 +1,29 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/site.mjs": { "includeFiles": "{public/index.html,data/default-content.json}" }
+  },
+  "rewrites": [
+    { "source": "/", "destination": "/api/site?route=/" },
+    { "source": "/index.html", "destination": "/api/site?route=/" },
+    { "source": "/work", "destination": "/api/site?route=/work" },
+    { "source": "/work/:slug", "destination": "/api/site?route=/work/:slug" },
+    { "source": "/api/:name(content|session|login|logout|upload)", "destination": "/api/site?route=/api/:name" }
+  ],
+  "redirects": [
+    { "source": "/admin", "destination": "/admin/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(admin|css|js|shared|vendor)/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; img-src 'self' https: data:; media-src 'self' https:; connect-src 'self' https://vercel.com https://*.blob.vercel-storage.com; frame-src 'self' https://www.youtube-nocookie.com https://player.vimeo.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; frame-ancestors 'self'; base-uri 'none'; form-action 'self'; object-src 'none'" }
+      ]
+    }
+  ]
+}

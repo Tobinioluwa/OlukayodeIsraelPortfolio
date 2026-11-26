@@ -1,5 +1,7 @@
 .env
 node_modules/
+dist/
+.vercel/
 data/content.json
 data/content.json.tmp
 data/backups/

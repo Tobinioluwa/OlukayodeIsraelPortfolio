@@ -6,6 +6,7 @@ const status = document.querySelector('#status');
 let content;      // what you are editing
 let published;    // what visitors see, as text, to spot unsaved changes
 let current = 'layout';
+let uploadMode = 'server'; // 'server' on your computer, 'blob' on Vercel
 const openItems = new WeakSet();
 
 function el(tag, props = {}, ...children) {
@@ -41,10 +42,39 @@ async function api(path, options = {}) {
   return data;
 }
 
+// ---------- uploads ----------
+
+const ENDINGS = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif', 'video/mp4': 'mp4', 'video/webm': 'webm' };
+
+/** Save a file and return its web address. */
+async function sendFile(file) {
+  if (uploadMode !== 'blob') return (await api('/api/upload', { method: 'POST', body: file })).url;
+
+  // On Vercel the file goes straight to storage, so large videos fit.
+  const ending = ENDINGS[file.type];
+  if (!ending) throw new Error('Upload a PNG, JPG, WebP or GIF image, or an MP4 or WebM video.');
+  const session = await api('/api/session');
+  if (!session.signedIn) throw Object.assign(new Error('Sign in again to continue.'), { status: 401 });
+  const { upload } = await import('/vendor/blob-client.js');
+  const name = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, '0')).join('');
+  try {
+    const result = await upload(`media/${name}.${ending}`, file, {
+      access: 'public',
+      handleUploadUrl: '/api/upload',
+      contentType: file.type,
+      multipart: file.size > 8 * 1024 * 1024,
+    });
+    return result.url;
+  } catch (error) {
+    console.error(error);
+    throw new Error('The upload did not finish. Check the file size and your connection, then try again.');
+  }
+}
+
 // ---------- sign in ----------
 
 /** Shows the sign-in form. After a timed-out session it keeps your unsaved edits. */
-function showSignIn(ready = true) {
+function showSignIn(ready = true, setupMessage = '') {
   const input = el('input', { type: 'password', id: 'password', autocomplete: 'current-password', required: true });
   const problem = el('p', { class: 'problem', role: 'alert' });
   const form = el('form', { class: 'signin', onsubmit: async (event) => {
@@ -57,7 +87,7 @@ function showSignIn(ready = true) {
     } catch (error) { problem.textContent = error.message; }
   } },
     el('h1', {}, 'Portfolio dashboard'),
-    ready ? null : el('p', { class: 'problem' }, 'The dashboard is locked. Add ADMIN_PASSWORD (10 characters or more) to the .env file, then restart the server.'),
+    ready ? null : el('p', { class: 'problem' }, setupMessage || 'The dashboard is locked. Set ADMIN_PASSWORD (10 characters or more) in .env or your hosting settings, then restart or redeploy.'),
     el('label', { for: 'password' }, 'Password'), input,
     el('button', { class: 'primary', disabled: !ready }, 'Sign in'),
     problem,
@@ -68,7 +98,7 @@ function showSignIn(ready = true) {
 
 async function openDashboard() {
   if (!content) {
-    content = cleanContent(await api('/api/content'));
+    content = cleanContent(await api('/api/content?fresh=1'));
     published = JSON.stringify(content);
   }
   buildShell();
@@ -273,8 +303,7 @@ function imageControl(field, target, id) {
       if (chosen.size > 5 * 1024 * 1024) return say('That image is over 5 MB. Make it smaller and try again.', true);
       say('Uploading the image…');
       try {
-        const result = await api('/api/upload', { method: 'POST', body: chosen });
-        target[field.key] = result.url;
+        target[field.key] = await sendFile(chosen);
         draw(); changed();
         say('Image uploaded. Publish to show it on the site.');
       } catch (error) {
@@ -302,8 +331,7 @@ function videoControl(field, target, id) {
       if (chosen.size > 100 * 1024 * 1024) return say('That video is over 100 MB. Compress it, or paste a YouTube or Vimeo link.', true);
       say('Uploading the video. Keep this page open…');
       try {
-        const result = await api('/api/upload', { method: 'POST', body: chosen });
-        target[field.key] = result.url;
+        target[field.key] = await sendFile(chosen);
         draw(); changed();
         say('Video uploaded. Publish to show it on the site.');
       } catch (error) {
@@ -360,8 +388,9 @@ function listControl(field, items, id) {
 
 try {
   const session = await api('/api/session');
+  uploadMode = session.uploads;
   if (session.signedIn) await openDashboard();
-  else showSignIn(session.ready);
+  else showSignIn(session.ready, session.setupMessage);
 } catch (error) {
   say(error.message, true);
 }
