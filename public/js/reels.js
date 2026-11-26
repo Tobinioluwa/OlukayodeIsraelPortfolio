@@ -150,7 +150,7 @@ export function galleryChapter(gallery, { scenes, isCalm }) {
 
   const nameOf = (item) => item.caption || (item.kind === 'video' ? 'Video' : 'Photo');
   const open = (item) => openViewer(nameOf(item), item.kind === 'video'
-    ? videoFrame({ src: item.video, poster: item.image, title: item.caption }, { title: nameOf(item), tone: item.tone })
+    ? videoFrame({ src: item.video, poster: item.image, title: item.caption }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
     : el('div', { class: 'viewer-image' }, picture(item.image, item.caption, item.tone, 'Your photo goes here')));
 
   const frames = items.map((item, i) => {

@@ -51,10 +51,10 @@ function playerFor(url) {
   return vimeo ? `https://player.vimeo.com/video/${vimeo[1]}` : '';
 }
 
-export function videoFrame(video, project) {
+export function videoFrame(video, project, emptyLabel = 'Your walkthrough video goes here') {
   const url = safeUrl(video.src);
   if (!url) {
-    return el('div', { class: 'media empty' }, picture(video.poster, '', project.tone, 'Your walkthrough video goes here'), el('span', { class: 'play', 'aria-hidden': 'true' }));
+    return el('div', { class: 'media empty' }, picture(video.poster, '', project.tone, emptyLabel), el('span', { class: 'play', 'aria-hidden': 'true' }));
   }
   const player = playerFor(url);
   if (player) {

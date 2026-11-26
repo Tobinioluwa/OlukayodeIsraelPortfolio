@@ -99,7 +99,7 @@ export function studioChapter(studio, { isCalm }) {
   const open = (item) => {
     for (const video of previews) video.pause();
     const body = item.kind === 'video'
-      ? videoFrame({ src: item.video, poster: item.image, title: item.title }, { title: nameOf(item), tone: item.tone })
+      ? videoFrame({ src: item.video, poster: item.image, title: item.title }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
       : el('div', { class: 'viewer-image' }, picture(item.image, item.title, item.tone, 'Your generated image goes here'));
     openViewer(nameOf(item), body,
       item.prompt && el('div', { class: 'made-with' }, el('h3', {}, 'Prompt'), el('p', {}, item.prompt)),
