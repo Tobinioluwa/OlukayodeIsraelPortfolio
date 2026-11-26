@@ -1,0 +1,6 @@
+.env
+node_modules/
+data/content.json
+data/content.json.tmp
+data/backups/
+data/uploads/

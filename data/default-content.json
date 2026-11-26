@@ -1,0 +1,308 @@
+{
+  "site": {
+    "name": "Tobi",
+    "fullName": "Olukayode Israel Oluwatobiloba",
+    "pageTitle": "Tobi (Olukayode Israel Oluwatobiloba) | Designer and visual storyteller",
+    "description": "Olukayode Israel Oluwatobiloba (Tobi) is a designer and visual storyteller with experience in ICT, communications, photography and videography.",
+    "shareImage": ""
+  },
+  "theme": {
+    "night": "#050a16",
+    "accent": "#2b63f0",
+    "light": "#8fbcff",
+    "gold": "#d8b45a",
+    "paper": "#edf1fb",
+    "motion": "full"
+  },
+  "hero": {
+    "greeting": "Hi, I'm Olukayode Israel Oluwatobiloba",
+    "title": "Tobi",
+    "role": "Designer and visual storyteller",
+    "intro": "Most people call me Tobi. I bring ICT, communications and design together to build websites and apps, tell their stories in photos and video, and automate the repeat work behind them.",
+    "primaryLabel": "See my work",
+    "secondaryLabel": "Get in touch"
+  },
+  "work": {
+    "visible": true,
+    "navLabel": "Work",
+    "heading": "Selected projects",
+    "items": [
+      {
+        "title": "Project One",
+        "kind": "Placeholder website",
+        "tone": "#1b3fae",
+        "tags": [
+          "Web design"
+        ],
+        "problem": "Placeholder: who had the problem, and what was hard for them?",
+        "solution": "Placeholder: what did you design, and why that way?",
+        "role": "Placeholder: the parts you did yourself.",
+        "outcome": "Placeholder: add a real result or what you learned.",
+        "videos": [
+          {
+            "title": "Walkthrough",
+            "description": "Placeholder: say what visitors will see in this video."
+          }
+        ],
+        "screens": [
+          {
+            "title": "Home screen",
+            "description": "Placeholder: explain what this screen helps people do."
+          },
+          {
+            "title": "Key screen",
+            "description": "Placeholder: explain the choice you made here."
+          }
+        ]
+      },
+      {
+        "title": "Project Two",
+        "kind": "Placeholder online store",
+        "tone": "#0f2466",
+        "tags": [
+          "Web design",
+          "E-commerce"
+        ],
+        "problem": "Placeholder: describe the problem.",
+        "solution": "Placeholder: describe your design.",
+        "role": "Placeholder: your role.",
+        "videos": [
+          {
+            "title": "Walkthrough",
+            "description": "Placeholder: say what the video shows."
+          }
+        ]
+      },
+      {
+        "title": "Project Three",
+        "kind": "Placeholder mobile app",
+        "tone": "#8fbcff",
+        "tags": [
+          "App design",
+          "UX design"
+        ],
+        "problem": "Placeholder: describe the problem.",
+        "solution": "Placeholder: describe your design.",
+        "role": "Placeholder: your role.",
+        "videos": [
+          {
+            "title": "Walkthrough",
+            "description": "Placeholder: say what the video shows."
+          }
+        ]
+      },
+      {
+        "title": "Project Four",
+        "kind": "Placeholder workflow",
+        "tone": "#2b63f0",
+        "tags": [
+          "Automation",
+          "n8n"
+        ],
+        "problem": "Placeholder: describe the manual work.",
+        "solution": "Placeholder: describe what you automated.",
+        "role": "Placeholder: your role.",
+        "videos": [
+          {
+            "title": "Walkthrough",
+            "description": "Placeholder: show the workflow running."
+          }
+        ]
+      },
+      {
+        "title": "Project Five",
+        "kind": "Placeholder photo and video story",
+        "tone": "#d3dff8",
+        "tags": [
+          "Photography",
+          "Videography"
+        ],
+        "problem": "Placeholder: what needed to be told or captured?",
+        "solution": "Placeholder: how did you plan, shoot and edit it?",
+        "role": "Placeholder: your role.",
+        "videos": [
+          {
+            "title": "The film",
+            "description": "Placeholder: say what the video shows."
+          }
+        ],
+        "screens": []
+      }
+    ]
+  },
+  "gallery": {
+    "visible": true,
+    "navLabel": "Photo and video",
+    "heading": "Through my lens",
+    "intro": "Photographs and films I have made.",
+    "items": [
+      {
+        "caption": "Placeholder photograph: portrait",
+        "kind": "photo",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "Placeholder video: event highlights",
+        "kind": "video",
+        "tone": "#0f2466"
+      },
+      {
+        "caption": "Placeholder photograph: event",
+        "kind": "photo",
+        "tone": "#8fbcff"
+      },
+      {
+        "caption": "Placeholder video: short story",
+        "kind": "video",
+        "tone": "#16306f"
+      },
+      {
+        "caption": "Placeholder photograph: product",
+        "kind": "photo",
+        "tone": "#d3dff8"
+      },
+      {
+        "caption": "Placeholder photograph: street",
+        "kind": "photo",
+        "tone": "#2b63f0"
+      }
+    ]
+  },
+  "services": {
+    "visible": true,
+    "navLabel": "Services",
+    "heading": "What I can do for you",
+    "items": [
+      {
+        "title": "Websites",
+        "body": "AI-assisted websites that explain what you offer clearly and make the next step easy.",
+        "tags": [
+          "Web design",
+          "Online stores",
+          "Booking sites"
+        ],
+        "art": "website",
+        "tone": "#2b63f0"
+      },
+      {
+        "title": "Apps and user experience",
+        "body": "App ideas turned into clear journeys and prototypes you can test with real people.",
+        "tags": [
+          "UX research",
+          "Figma prototypes",
+          "User testing"
+        ],
+        "art": "app",
+        "tone": "#10286e"
+      },
+      {
+        "title": "Photography and videography",
+        "body": "Photos and video that show people, products and events, ready for your site and social pages.",
+        "tags": [
+          "Photography",
+          "Videography"
+        ],
+        "art": "camera",
+        "tone": "#a9ccff"
+      },
+      {
+        "title": "Communications and content",
+        "body": "A clear message and a content plan, so your words and visuals tell the same story.",
+        "tags": [
+          "Communications",
+          "Content strategy"
+        ],
+        "art": "story",
+        "tone": "#173a9c"
+      },
+      {
+        "title": "Automation with n8n",
+        "body": "Workflows that handle repeat jobs such as daily reports, routing requests and gathering information.",
+        "tags": [
+          "Reporting",
+          "Support routing",
+          "Research tools"
+        ],
+        "art": "workflow",
+        "tone": "#081338"
+      }
+    ]
+  },
+  "about": {
+    "visible": true,
+    "navLabel": "About",
+    "heading": "Call me Tobi",
+    "bio": "My name is Olukayode Israel Oluwatobiloba, but most people call me Tobi.\nMy experience brings together ICT, communications, design, photography and videography. They serve one goal: helping people understand an idea and use it with ease.",
+    "photo": "",
+    "skills": [],
+    "facts": [],
+    "experience": [],
+    "strandsHeading": "Three ways I bring an idea to people",
+    "strands": [
+      {
+        "title": "Design it",
+        "body": "I shape websites and apps around the people who will use them.",
+        "tags": [
+          "UX research",
+          "Interaction design",
+          "AI-assisted design",
+          "Figma",
+          "Prototyping",
+          "User testing",
+          "Information architecture"
+        ]
+      },
+      {
+        "title": "Tell its story",
+        "body": "I use photos, video and clear communication to show people why it matters.",
+        "tags": [
+          "Photography",
+          "Videography",
+          "Communications",
+          "Content strategy"
+        ]
+      },
+      {
+        "title": "Keep it running",
+        "body": "I draw on ICT and automation to handle the work behind the scenes.",
+        "tags": [
+          "ICT",
+          "n8n automation"
+        ]
+      }
+    ]
+  },
+  "words": {
+    "visible": false,
+    "navLabel": "Praise",
+    "heading": "What people say",
+    "items": [
+      {
+        "quote": "Placeholder quote. Replace it with real words from someone you worked with.",
+        "person": "Person's name",
+        "detail": "Their role"
+      },
+      {
+        "quote": "Placeholder quote. Show this section only once you have real ones.",
+        "person": "Person's name",
+        "detail": "Their role"
+      }
+    ]
+  },
+  "contact": {
+    "visible": true,
+    "navLabel": "Contact",
+    "heading": "Let's work together",
+    "body": "Have a website, app or repeat task in mind? Tell me about it.",
+    "email": "hello@example.com",
+    "links": []
+  },
+  "order": [
+    "work",
+    "gallery",
+    "services",
+    "about",
+    "words",
+    "contact"
+  ]
+}
