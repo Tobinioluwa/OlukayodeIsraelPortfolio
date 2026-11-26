@@ -12,6 +12,9 @@ const choice = (key, label, options) => ({ key, label, type: 'choice', options }
 const tags = (key, label) => ({ key, label: `${label} (separate with commas)`, type: 'tags', max: 40 });
 const list = (key, label, itemName, fields, max = 24) => ({ key, label, type: 'list', itemName, fields, max });
 
+// "Automatic" comes first, so it is what new and older entries get.
+const shape = choice('shape', 'Shape', [['auto', 'Automatic (same as your file)'], ['landscape', 'Landscape 4:3'], ['wide', 'Widescreen 16:9'], ['portrait', 'Portrait 3:4'], ['tall', 'Vertical 9:16'], ['square', 'Square']]);
+
 // Sections that can be reordered and hidden. The opening screen always comes first.
 export const SECTION_IDS = ['work', 'gallery', 'studio', 'services', 'about', 'words', 'contact'];
 
@@ -60,6 +63,7 @@ export const SCHEMA = [
         long('description', 'What the video shows', 240),
         video('src', 'Video'),
         image('poster', 'Picture shown before it plays'),
+        shape,
       ], 8),
       list('screens', 'Screens', 'screen', [
         text('title', 'Screen name', 60),
@@ -77,6 +81,7 @@ export const SCHEMA = [
       choice('kind', 'This is a', [['photo', 'Photo'], ['video', 'Video']]),
       image('image', 'Photo, or the picture shown before a video plays'),
       video('video', 'Video (only for videos)'),
+      shape,
       color('tone', 'Colour when there is no image'),
     ], 24),
   ] },
@@ -91,7 +96,7 @@ export const SCHEMA = [
       video('video', 'Video (only for videos)'),
       long('prompt', 'Prompt you used (optional, visitors can read it)', 400),
       text('tool', 'Made with (optional)', 60),
-      choice('shape', 'Shape', [['landscape', 'Landscape 4:3'], ['portrait', 'Portrait 3:4'], ['square', 'Square'], ['wide', 'Widescreen 16:9'], ['tall', 'Vertical 9:16']]),
+      shape,
       color('tone', 'Colour when there is no image'),
     ], 24),
   ] },

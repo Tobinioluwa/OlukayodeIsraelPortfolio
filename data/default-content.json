@@ -121,7 +121,8 @@
       {
         "caption": "Placeholder photograph: portrait",
         "kind": "photo",
-        "tone": "#1b3fae"
+        "tone": "#1b3fae",
+        "shape": "portrait"
       },
       {
         "caption": "Placeholder video: event highlights",
@@ -136,7 +137,8 @@
       {
         "caption": "Placeholder video: short story",
         "kind": "video",
-        "tone": "#16306f"
+        "tone": "#16306f",
+        "shape": "tall"
       },
       {
         "caption": "Placeholder photograph: product",

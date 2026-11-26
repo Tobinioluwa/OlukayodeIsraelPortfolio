@@ -1,6 +1,6 @@
 // The pages visitors open to look at work closely: all projects, and one project.
 import { projectSlugs, safeUrl } from '/shared/schema.mjs';
-import { el, picture, tagList, openViewer } from '/js/dom.js';
+import { el, picture, tagList, openViewer, shapeFrame } from '/js/dom.js';
 
 // ---------- all projects ----------
 
@@ -52,6 +52,10 @@ function playerFor(url) {
 }
 
 export function videoFrame(video, project, emptyLabel = 'Your walkthrough video goes here') {
+  return shapeFrame(player(video, project, emptyLabel), { shape: video.shape, image: video.poster, video: video.src });
+}
+
+function player(video, project, emptyLabel) {
   const url = safeUrl(video.src);
   if (!url) {
     return el('div', { class: 'media empty' }, picture(video.poster, '', project.tone, emptyLabel), el('span', { class: 'play', 'aria-hidden': 'true' }));

@@ -35,6 +35,40 @@ export function picture(src, alt, tone, label) {
   return paint(el('span', { class: 'shot blank' }, el('span', {}, label)), tone);
 }
 
+const SHAPES = { landscape: 4 / 3, wide: 16 / 9, portrait: 3 / 4, tall: 9 / 16, square: 1 };
+
+/**
+ * Work out a frame's width divided by its height, and pass it to `use`.
+ * "Automatic" measures the video or picture. It may answer later, or not at all.
+ */
+export function whenShaped({ shape, image, video }, use) {
+  if (SHAPES[shape]) return use(SHAPES[shape]);
+  const clip = safeUrl(video);
+  const still = safeUrl(image);
+  // Very long or very thin files are limited, so they cannot break the layout.
+  const found = (width, height) => { if (width && height) use(Math.min(2.4, Math.max(0.45, width / height))); };
+  if (/youtube\.com\/shorts\//i.test(clip)) use(SHAPES.tall);
+  else if (/\.(mp4|webm)(\?.*)?$/i.test(clip)) {
+    const probe = document.createElement('video');
+    probe.preload = 'metadata';
+    probe.addEventListener('loadedmetadata', () => found(probe.videoWidth, probe.videoHeight), { once: true });
+    probe.src = clip;
+  } else if (still) {
+    const probe = new Image();
+    probe.addEventListener('load', () => found(probe.naturalWidth, probe.naturalHeight), { once: true });
+    probe.src = still;
+  }
+}
+
+/** Give a frame the shape of what is inside it. Tall ones are also kept to the screen's height. */
+export function shapeFrame(node, item) {
+  whenShaped(item, (ratio) => {
+    node.style.setProperty('--ratio', ratio.toFixed(4));
+    node.classList.toggle('upright', ratio < 1.1);
+  });
+  return node;
+}
+
 export const tagList = (items) => items.length && el('ul', { class: 'tags' }, items.map((t) => el('li', {}, t)));
 
 // ---------- pop-up for enlarging an image ----------

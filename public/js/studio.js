@@ -4,10 +4,9 @@
 //   - cards tilt towards the pointer
 //   - a prompt bar types out the prompts behind the work
 import { safeUrl } from '/shared/schema.mjs';
-import { el, picture, openViewer } from '/js/dom.js';
+import { el, picture, openViewer, shapeFrame, whenShaped } from '/js/dom.js';
 import { videoFrame } from '/js/pages.js';
 
-const SHAPES = { landscape: '4 / 3', portrait: '3 / 4', square: '1 / 1', wide: '16 / 9', tall: '9 / 16' };
 const DEVELOP_MS = 1500;
 
 let cleanup = () => {};
@@ -99,8 +98,8 @@ export function studioChapter(studio, { isCalm }) {
   const open = (item) => {
     for (const video of previews) video.pause();
     const body = item.kind === 'video'
-      ? videoFrame({ src: item.video, poster: item.image, title: item.title }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
-      : el('div', { class: 'viewer-image' }, picture(item.image, item.title, item.tone, 'Your generated image goes here'));
+      ? videoFrame({ src: item.video, poster: item.image, title: item.title, shape: item.shape }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
+      : shapeFrame(el('div', { class: 'viewer-image' }, picture(item.image, item.title, item.tone, 'Your generated image goes here')), { shape: item.shape, image: item.image });
     openViewer(nameOf(item), body,
       item.prompt && el('div', { class: 'made-with' }, el('h3', {}, 'Prompt'), el('p', {}, item.prompt)),
       item.tool && el('div', { class: 'made-with' }, el('h3', {}, 'Made with'), el('p', {}, item.tool)));
@@ -124,7 +123,8 @@ export function studioChapter(studio, { isCalm }) {
       preview || picture(item.image, '', item.tone, ''),
       item.kind === 'video' && el('span', { class: 'play', 'aria-hidden': 'true' }),
       el('span', { class: 'sheen', 'aria-hidden': 'true' }));
-    frame.style.aspectRatio = SHAPES[item.shape] || SHAPES.landscape;
+    frame.style.aspectRatio = '4 / 3';
+    whenShaped({ shape: item.shape, image: item.image, video: item.kind === 'video' ? item.video : '' }, (ratio) => { frame.style.aspectRatio = ratio.toFixed(4); });
     const button = el('button', { type: 'button', class: 'gen-card', 'aria-label': `${item.kind === 'video' ? 'Play' : 'View'} ${nameOf(item)}`, onclick: () => open(item) },
       frame,
       el('span', { class: 'gen-text' },

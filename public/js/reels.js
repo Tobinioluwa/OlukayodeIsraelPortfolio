@@ -1,7 +1,7 @@
 // The two scroll "reels": the project wheel and the photo and video film strip.
 // Each screen has three rows (heading, moving content, controls) so nothing can overlap.
 import { projectSlugs } from '/shared/schema.mjs';
-import { el, picture, openViewer } from '/js/dom.js';
+import { el, picture, openViewer, shapeFrame, whenShaped } from '/js/dom.js';
 import { videoFrame } from '/js/pages.js';
 
 export const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
@@ -49,12 +49,12 @@ export function stepper(section, count, isCalm) {
 }
 
 /** Shared movement: turn scrolling into a position between the first and last item. */
-function reelScene(section, count, area, measure, place, onChange) {
+function reelScene(section, count, area, measure, place, onChange, version = () => 0) {
   let shown = 0;
   let active = -1;
   let size = '';
   return (instant) => {
-    const next = `${area.clientWidth}x${area.clientHeight}`;
+    const next = `${area.clientWidth}x${area.clientHeight}x${version()}`;
     const resized = next !== size;
     if (resized) { size = next; measure(area.clientWidth, area.clientHeight); }
     const target = dwell(progressOf(section) * Math.max(0, count - 1));
@@ -150,8 +150,8 @@ export function galleryChapter(gallery, { scenes, isCalm }) {
 
   const nameOf = (item) => item.caption || (item.kind === 'video' ? 'Video' : 'Photo');
   const open = (item) => openViewer(nameOf(item), item.kind === 'video'
-    ? videoFrame({ src: item.video, poster: item.image, title: item.caption }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
-    : el('div', { class: 'viewer-image' }, picture(item.image, item.caption, item.tone, 'Your photo goes here')));
+    ? videoFrame({ src: item.video, poster: item.image, title: item.caption, shape: item.shape }, { title: nameOf(item), tone: item.tone }, 'Video coming soon')
+    : shapeFrame(el('div', { class: 'viewer-image' }, picture(item.image, item.caption, item.tone, 'Your photo goes here')), { shape: item.shape, image: item.image }));
 
   const frames = items.map((item, i) => {
     const button = el('button', { type: 'button', class: `shot-button ${item.kind}`, 'aria-label': `${item.kind === 'video' ? 'Play' : 'View'} ${nameOf(item)}`, onclick: () => open(item) },
@@ -168,27 +168,45 @@ export function galleryChapter(gallery, { scenes, isCalm }) {
     el('div', { class: 'section-head' }, el('h2', {}, gallery.heading), gallery.intro && el('p', {}, gallery.intro)),
     area, controls.node));
 
-  let spacing = 400;
+  // Every frame has the shape of its own photo or video, so widths differ.
+  const ratios = items.map(() => 4 / 3);
+  let centres = items.map(() => 0);
+  let changes = 0;
+  items.forEach((item, i) => whenShaped({ shape: item.shape, image: item.image, video: item.kind === 'video' ? item.video : '' }, (ratio) => {
+    ratios[i] = ratio;
+    frames[i].style.setProperty('--ratio', ratio.toFixed(4));
+    changes += 1;
+    if (section.isConnected) dispatchEvent(new Event('resize'));
+  }));
+
   function measure(width, height) {
-    const small = width < 700;
-    let frameHeight = Math.max(120, Math.min(height - 64, 500));
-    const frameWidth = Math.min(frameHeight * 1.45, width * (small ? 0.78 : 0.56));
-    frameHeight = Math.min(frameHeight, frameWidth * (small ? 1.2 : 0.75));
-    spacing = frameWidth * 0.96;
-    area.style.setProperty('--frame-w', `${frameWidth}px`);
-    area.style.setProperty('--frame-h', `${frameHeight}px`);
+    const tallest = Math.max(120, Math.min(height - 64, 500));
+    const widest = width * (width < 700 ? 0.78 : 0.56);
+    area.style.setProperty('--frame-h', `${tallest}px`);
+    const widths = frames.map((frame, i) => {
+      const frameWidth = Math.min(tallest * ratios[i], widest);
+      frame.style.setProperty('--frame-w', `${frameWidth}px`);
+      frame.style.setProperty('--frame-h', `${frameWidth / ratios[i]}px`);
+      return frameWidth;
+    });
+    centres = [];
+    widths.forEach((w, i) => centres.push(i === 0 ? 0 : centres[i - 1] + ((widths[i - 1] + w) / 2) * 0.92 + 16));
   }
 
   scenes.push(reelScene(section, items.length, area, measure, (shown) => {
+    // How far along the strip the middle of the screen is.
+    const from = Math.floor(shown);
+    const to = Math.min(items.length - 1, from + 1);
+    const middle = (centres[from] ?? 0) + ((centres[to] ?? 0) - (centres[from] ?? 0)) * (shown - from);
     frames.forEach((frame, i) => {
       const offset = i - shown;
       const near = clamp(1 - Math.abs(offset));
-      frame.style.setProperty('--x', `${(offset * spacing).toFixed(1)}px`);
+      frame.style.setProperty('--x', `${(centres[i] - middle).toFixed(1)}px`);
       frame.style.setProperty('--near', near.toFixed(3));
       frame.style.zIndex = String(100 - Math.round(Math.abs(offset) * 2));
     });
     // The perforations travel with the film.
-    area.style.setProperty('--travel', `${(-shown * spacing).toFixed(1)}px`);
+    area.style.setProperty('--travel', `${(-middle).toFixed(1)}px`);
   }, (index) => {
     active = index;
     const item = items[index];
@@ -196,6 +214,6 @@ export function galleryChapter(gallery, { scenes, isCalm }) {
     frames.forEach((frame, i) => frame.classList.toggle('focus', i === index));
     controls.update(index, nameOf(item), item.kind === 'video' ? 'Video' : 'Photograph',
       el('button', { type: 'button', class: 'button solid', onclick: () => open(item) }, item.kind === 'video' ? 'Play video' : 'View photo'));
-  }));
+  }, () => changes));
   return section;
 }
