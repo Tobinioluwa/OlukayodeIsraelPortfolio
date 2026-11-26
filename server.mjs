@@ -5,6 +5,7 @@ import { existsSync, readFileSync, createReadStream } from 'node:fs';
 import { randomBytes, createHash, timingSafeEqual } from 'node:crypto';
 import { dirname, join, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isIP } from 'node:net';
 import { cleanContent, projectSlugs } from './shared/schema.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
@@ -28,6 +29,7 @@ const LOCAL_ONLY = HOST === '127.0.0.1' || HOST === 'localhost' || HOST === '::1
 // The sample password in .env.example only works on your own computer.
 const PASSWORD_OK = PASSWORD.length >= 10 && (LOCAL_ONLY || !PASSWORD.startsWith('local-test-only'));
 const SESSION_MS = 8 * 60 * 60 * 1000;
+const CLIENT_IP_HEADER = (process.env.CLIENT_IP_HEADER || '').trim().toLowerCase();
 
 const sessions = new Map();
 const failures = new Map();
@@ -114,6 +116,16 @@ const sessionCookie = (req, token, maxAge) => {
 
 const hash = (value) => createHash('sha256').update(String(value)).digest();
 
+/**
+ * Who is trying to sign in. Behind a host's proxy every visitor shares the proxy's address,
+ * so one person's wrong guesses would lock out everyone. Set CLIENT_IP_HEADER to a header
+ * your host fills in itself. Never name one that visitors can set, or the limit can be dodged.
+ */
+function visitorAddress(req) {
+  const sent = CLIENT_IP_HEADER && String(req.headers[CLIENT_IP_HEADER] || '').trim();
+  return sent && isIP(sent) ? sent : req.socket.remoteAddress;
+}
+
 /** Work out the image type from the file's first bytes, not from its name. */
 function imageType(b) {
   if (b.length < 12) return null;
@@ -143,13 +155,15 @@ async function api(req, res, path) {
 
   if (req.method === 'POST' && path === '/api/login') {
     if (!PASSWORD_OK) throw new HttpError(503, 'Set ADMIN_PASSWORD (10 characters or more) and restart the server.');
-    const who = req.socket.remoteAddress;
-    const record = failures.get(who);
-    if (record && record.count >= 8 && record.until > Date.now()) throw new HttpError(429, 'Too many tries. Wait 15 minutes and try again.');
+    const who = visitorAddress(req);
     const { password } = (await readJson(req, 4096)) || {};
+    // Count only after the request has fully arrived, so many tries sent at once cannot slip past.
+    const now = Date.now();
+    for (const [address, entry] of failures) if (entry.until <= now) failures.delete(address);
+    const record = failures.get(who);
+    if (record && record.count >= 8) throw new HttpError(429, 'Too many tries. Wait 15 minutes and try again.');
     if (!timingSafeEqual(hash(password), hash(PASSWORD))) {
-      const count = record && record.until > Date.now() ? record.count + 1 : 1;
-      failures.set(who, { count, until: Date.now() + 15 * 60 * 1000 });
+      failures.set(who, { count: (record?.count || 0) + 1, until: now + 15 * 60 * 1000 });
       throw new HttpError(401, 'That password is not right.');
     }
     failures.delete(who);

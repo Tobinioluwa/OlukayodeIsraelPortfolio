@@ -44,6 +44,7 @@ On the host, set:
 - `ADMIN_PASSWORD`: a long, unique password. The sample one is refused online.
 - `HOST=0.0.0.0` and `NODE_ENV=production`
 - `SITE_URL`: your web address, used for link previews
+- `CLIENT_IP_HEADER`: on Render, `cf-connecting-ip`. It lets the sign-in limit tell visitors apart, so a stranger's wrong guesses do not lock you out. On another host, name only a header that the host sets itself, and leave this unset if you are not sure.
 - `DATA_DIR`: a folder on the persistent disk. Copy your `data` folder there.
 
 Serve it over HTTPS. Sign-ins last 8 hours and end when the server restarts.
