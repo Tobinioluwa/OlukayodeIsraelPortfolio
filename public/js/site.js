@@ -4,6 +4,7 @@ import { clamp, progressOf, dwell, stepper, workChapter, galleryChapter } from '
 import { drawing } from '/js/art.js';
 import { projectsPage, projectPage } from '/js/pages.js';
 import { nameField } from '/js/name-field.js';
+import { studioChapter } from '/js/studio.js';
 
 const main = document.querySelector('#main');
 const menu = document.querySelector('#menu');
@@ -153,7 +154,7 @@ function contactChapter(contact, { name, scenes }) {
   return section;
 }
 
-const BUILDERS = { work: workChapter, gallery: galleryChapter, services: servicesChapter, about: aboutChapter, words: wordsChapter, contact: contactChapter };
+const BUILDERS = { work: workChapter, gallery: galleryChapter, studio: studioChapter, services: servicesChapter, about: aboutChapter, words: wordsChapter, contact: contactChapter };
 
 // ---------- render ----------
 

@@ -136,6 +136,53 @@ h2 { font: 800 clamp(1.6rem, 3.6vw, 3rem)/1.15 var(--wide); letter-spacing: -0.0
 .viewfinder::after { content: ""; position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
 .frame-caption { display: none; }
 
+/* ---------- AI studio: work that generates into view ---------- */
+.studio { padding: 16vh var(--gutter) 14vh; overflow: hidden; isolation: isolate; }
+/* A field of dots and two slow pools of light. */
+.studio::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(color-mix(in srgb, var(--light) 28%, transparent) 1px, transparent 1.6px) 0 0 / 28px 28px; -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); opacity: .55; }
+.aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.aurora::before, .aurora::after { content: ""; position: absolute; width: 70vmax; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 38%, transparent), transparent); animation: drift 16s ease-in-out infinite alternate paused; }
+.aurora::before { left: -25vmax; top: -10vmax; }
+.aurora::after { right: -30vmax; bottom: -15vmax; background: radial-gradient(closest-side, color-mix(in srgb, var(--light) 22%, transparent), transparent); animation-delay: -8s; }
+.studio.awake .aurora::before, .studio.awake .aurora::after, .studio.awake .prompt-bar::before { animation-play-state: running; }
+@keyframes drift { to { transform: translate(14vmax, 8vmax) scale(1.15); } }
+.studio-inner { max-width: 1120px; margin: 0 auto; }
+.studio-head { display: grid; justify-items: center; gap: 12px; margin-bottom: 30px; text-align: center; }
+.studio-head p { max-width: 52ch; color: var(--soft); }
+.prompt-bar { position: relative; display: flex; align-items: center; gap: 14px; max-width: 720px; margin: 0 auto 26px; padding: 12px 18px 12px 12px; border-radius: 22px; background: color-mix(in srgb, var(--night) 82%, transparent); isolation: isolate; }
+/* A light that travels round the edge of the prompt bar. */
+@property --sweep { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.prompt-bar::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: conic-gradient(from var(--sweep), color-mix(in srgb, var(--light) 25%, transparent) 0 62%, var(--accent) 76%, var(--light) 90%, var(--gold) 95%, color-mix(in srgb, var(--light) 25%, transparent)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: sweep 4s linear infinite paused; }
+@keyframes sweep { to { --sweep: 360deg; } }
+.prompt-label { flex: none; font-size: .82rem; font-weight: 700; padding: 6px 14px; border-radius: 99px; background: var(--accent); color: var(--on-accent); }
+/* A fixed height, so the page does not jump while the words are typed. */
+.prompt-line { display: block; height: 3em; overflow: hidden; min-width: 0; font: 300 .98rem/1.5 var(--lead); align-content: center; overflow-wrap: anywhere; }
+.caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; vertical-align: text-bottom; background: var(--gold); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.gen-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
+.gen-filters button { min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--night) 70%, transparent); }
+.gen-filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
+.gen-grid { columns: 3 260px; column-gap: 22px; }
+.gen-grid li { break-inside: avoid; padding-bottom: 22px; perspective: 900px; }
+.gen-card { --rx: 0deg; --ry: 0deg; --px: 50%; --py: 50%; display: block; width: 100%; text-align: left; transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .18s ease-out; }
+.gen-frame { display: block; position: relative; width: 100%; overflow: hidden; border-radius: 18px; border: 1px solid color-mix(in srgb, var(--light) 30%, transparent); background: color-mix(in srgb, var(--accent) 12%, var(--night)); transition: box-shadow .3s, border-color .3s; }
+.gen-card:hover .gen-frame, .gen-card:focus-visible .gen-frame { border-color: var(--light); box-shadow: 0 22px 60px color-mix(in srgb, var(--accent) 48%, transparent); }
+.gen-frame > .shot { position: absolute; inset: 0; width: 100%; height: 100%; transition: filter .9s, transform .6s; }
+.gen-card:hover .gen-frame > .shot { transform: scale(1.05); }
+.gen-frame.latent > .shot { filter: blur(18px) saturate(.3) brightness(.5); }
+.noise { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; }
+.sheen { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; background: radial-gradient(260px circle at var(--px) var(--py), rgb(255 255 255 / .22), transparent 70%); transition: opacity .3s; }
+.gen-card:hover .sheen { opacity: 1; }
+.gen-frame .play { z-index: 1; width: 58px; height: 58px; pointer-events: none; transition: opacity .3s; }
+.gen-frame .play::after { left: 21px; top: 16px; border-block-width: 11px; border-left-width: 18px; }
+.gen-card:hover .play { opacity: .35; }
+.gen-text { display: grid; gap: 2px; padding: 12px 4px 0; overflow-wrap: anywhere; }
+.gen-title { font: 500 1rem/1.4 var(--wide); }
+.gen-meta { color: var(--soft); font-size: .9rem; }
+.made-with h3 { font: 500 .95rem var(--wide); margin-bottom: 6px; }
+.made-with p { color: var(--soft); white-space: pre-line; }
+.calm .prompt-bar::before { display: none; }
+
 /* ---------- services: sheets that tilt away ---------- */
 .services { height: calc(100vh + (var(--count) - 1) * 78vh); background: var(--paper); color: var(--on-paper); border-radius: 40px; }
 .services .section-head { justify-content: center; text-align: center; }
@@ -225,9 +272,11 @@ h2 { font: 800 clamp(1.6rem, 3.6vw, 3rem)/1.15 var(--wide); letter-spacing: -0.0
 
 /* ---------- tablet and phone ---------- */
 @media (max-width: 1100px) { .rail { display: none; } }
+@media (max-width: 920px) and (min-width: 761px) { #menu a { padding: 7px 9px; font-size: .86rem; } .bar { padding-left: 16px; } }
 
 @media (max-width: 760px) {
   .bar { top: 10px; }
+  .prompt-line { height: 4.5em; }
   .menu-button { display: block; }
   #menu { display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; flex-direction: column; padding: 10px; border-radius: 24px; border: 1px solid var(--line); background: var(--night); max-height: calc(100vh - 100px); overflow-y: auto; }
   .menu-open #menu { display: flex; }

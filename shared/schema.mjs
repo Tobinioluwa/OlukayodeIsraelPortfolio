@@ -13,7 +13,7 @@ const tags = (key, label) => ({ key, label: `${label} (separate with commas)`, t
 const list = (key, label, itemName, fields, max = 24) => ({ key, label, type: 'list', itemName, fields, max });
 
 // Sections that can be reordered and hidden. The opening screen always comes first.
-export const SECTION_IDS = ['work', 'gallery', 'services', 'about', 'words', 'contact'];
+export const SECTION_IDS = ['work', 'gallery', 'studio', 'services', 'about', 'words', 'contact'];
 
 export const SCHEMA = [
   { key: 'site', label: 'Name and search', fields: [
@@ -77,6 +77,21 @@ export const SCHEMA = [
       choice('kind', 'This is a', [['photo', 'Photo'], ['video', 'Video']]),
       image('image', 'Photo, or the picture shown before a video plays'),
       video('video', 'Video (only for videos)'),
+      color('tone', 'Colour when there is no image'),
+    ], 24),
+  ] },
+  { key: 'studio', label: 'AI studio', section: true, fields: [
+    text('navLabel', 'Menu name', 20),
+    text('heading', 'Heading', 40),
+    long('intro', 'Supporting line', 200),
+    list('items', 'AI images and videos', 'AI image or video', [
+      text('title', 'Title', 60),
+      choice('kind', 'This is a', [['image', 'Image'], ['video', 'Video']]),
+      image('image', 'Image, or the picture shown before a video plays'),
+      video('video', 'Video (only for videos)'),
+      long('prompt', 'Prompt you used (optional, visitors can read it)', 400),
+      text('tool', 'Made with (optional)', 60),
+      choice('shape', 'Shape', [['landscape', 'Landscape 4:3'], ['portrait', 'Portrait 3:4'], ['square', 'Square'], ['wide', 'Widescreen 16:9'], ['tall', 'Vertical 9:16']]),
       color('tone', 'Colour when there is no image'),
     ], 24),
   ] },
@@ -166,7 +181,10 @@ export function cleanContent(input) {
     if (group.section) out[group.key].visible = source[group.key]?.visible !== false;
   }
   const order = (Array.isArray(source.order) ? source.order : []).filter((id) => SECTION_IDS.includes(id));
-  out.order = [...new Set([...order, ...SECTION_IDS])];
+  out.order = [...new Set(order)];
+  SECTION_IDS.forEach((id, i) => {
+    if (!out.order.includes(id)) out.order.splice(out.order.indexOf(SECTION_IDS[i - 1]) + 1, 0, id);
+  });
   return out;
 }
 

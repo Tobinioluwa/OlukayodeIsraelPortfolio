@@ -92,7 +92,7 @@ export function projectPage(work, index) {
       el('p', { class: 'project-kind' }, project.kind),
       el('p', { class: 'project-actions' },
         project.videos.length > 0 && el('button', { type: 'button', class: 'button solid', onclick: () => document.getElementById('videos').scrollIntoView() }, project.videos.length > 1 ? 'Watch the videos' : 'Watch the video'),
-        url && el('a', { class: 'button ghost', href: url, target: '_blank', rel: 'noopener' }, 'Visit the live project'))),
+        url && el('a', { class: 'button ghost', href: url, target: '_blank', rel: 'noopener' }, /^https:\/\/(www\.)?github\.com\//i.test(url) ? 'View the code on GitHub' : 'Visit the live project'))),
     safeUrl(project.image) && el('div', { class: 'cover' }, picture(project.image, project.imageAlt, project.tone, '')),
     el('div', { class: 'insights' },
       insight('Problem', project.problem),

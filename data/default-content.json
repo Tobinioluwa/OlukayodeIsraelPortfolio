@@ -28,104 +28,81 @@
     "heading": "Selected projects",
     "items": [
       {
-        "title": "Project One",
-        "kind": "Placeholder website",
+        "title": "ExamScavenger",
+        "kind": "Project for Diamond Solution",
+        "tone": "#173a9c",
+        "tags": [],
+        "videos": [],
+        "screens": []
+      },
+      {
+        "title": "IGERI AI",
+        "kind": "Learning companion for children",
         "tone": "#1b3fae",
         "tags": [
-          "Web design"
+          "Web app",
+          "AI",
+          "Education"
         ],
-        "problem": "Placeholder: who had the problem, and what was hard for them?",
-        "solution": "Placeholder: what did you design, and why that way?",
-        "role": "Placeholder: the parts you did yourself.",
-        "outcome": "Placeholder: add a real result or what you learned.",
-        "videos": [
-          {
-            "title": "Walkthrough",
-            "description": "Placeholder: say what visitors will see in this video."
-          }
-        ],
-        "screens": [
-          {
-            "title": "Home screen",
-            "description": "Placeholder: explain what this screen helps people do."
-          },
-          {
-            "title": "Key screen",
-            "description": "Placeholder: explain the choice you made here."
-          }
-        ]
+        "problem": "Nigerian children need AI learning help that suits their age, follows their curriculum and reflects their culture.",
+        "solution": "A chat companion that adjusts to each child’s age group, follows the Nigerian NERDC curriculum and supports Nigerian languages, with a dashboard for parents. Built with React, TypeScript and Firebase.",
+        "link": "https://igeri.netlify.app/",
+        "videos": [],
+        "screens": []
       },
       {
-        "title": "Project Two",
-        "kind": "Placeholder online store",
+        "title": "DL4All Nigeria Elections",
+        "kind": "Online voting site",
         "tone": "#0f2466",
         "tags": [
-          "Web design",
-          "E-commerce"
+          "Web app"
         ],
-        "problem": "Placeholder: describe the problem.",
-        "solution": "Placeholder: describe your design.",
-        "role": "Placeholder: your role.",
-        "videos": [
-          {
-            "title": "Walkthrough",
-            "description": "Placeholder: say what the video shows."
-          }
-        ]
+        "problem": "State and local government presidents need to vote in one national election and follow the results.",
+        "solution": "Approved voters sign in, vote once and get a receipt code. Ballots are secret and results update live, while an admin manages approvals and positions. Built with Next.js and Supabase.",
+        "link": "https://dl4all-elections.vercel.app",
+        "videos": [],
+        "screens": []
       },
       {
-        "title": "Project Three",
-        "kind": "Placeholder mobile app",
+        "title": "SignEasy",
+        "kind": "Sign language mobile app",
         "tone": "#8fbcff",
         "tags": [
-          "App design",
-          "UX design"
+          "Mobile app",
+          "Accessibility"
         ],
-        "problem": "Placeholder: describe the problem.",
-        "solution": "Placeholder: describe your design.",
-        "role": "Placeholder: your role.",
-        "videos": [
-          {
-            "title": "Walkthrough",
-            "description": "Placeholder: say what the video shows."
-          }
-        ]
+        "problem": "Many hearing Nigerians do not know sign language, which makes everyday communication with Deaf people hard.",
+        "solution": "An offline Nigerian Sign Language reference with everyday phrases in five categories, an A to Z fingerspelling guide and instant search. Built with Flutter.",
+        "link": "https://github.com/Tobinioluwa/signEasy",
+        "videos": [],
+        "screens": []
       },
       {
-        "title": "Project Four",
-        "kind": "Placeholder workflow",
+        "title": "FarmLog",
+        "kind": "Farm diary mobile app",
         "tone": "#2b63f0",
         "tags": [
-          "Automation",
-          "n8n"
+          "Mobile app",
+          "Agriculture"
         ],
-        "problem": "Placeholder: describe the manual work.",
-        "solution": "Placeholder: describe what you automated.",
-        "role": "Placeholder: your role.",
-        "videos": [
-          {
-            "title": "Walkthrough",
-            "description": "Placeholder: show the workflow running."
-          }
-        ]
+        "problem": "Many smallholder farmers keep records on paper or from memory, so it is hard to tell whether a season made a profit.",
+        "solution": "An offline farm diary for logging crops, growth stages, harvest dates and input costs. Built with Flutter.",
+        "link": "https://github.com/Tobinioluwa/FarmLog",
+        "videos": [],
+        "screens": []
       },
       {
-        "title": "Project Five",
-        "kind": "Placeholder photo and video story",
+        "title": "Computer Shop Management System",
+        "kind": "Business software",
         "tone": "#d3dff8",
         "tags": [
-          "Photography",
-          "Videography"
+          "Business software",
+          "ICT"
         ],
-        "problem": "Placeholder: what needed to be told or captured?",
-        "solution": "Placeholder: how did you plan, shoot and edit it?",
-        "role": "Placeholder: your role.",
-        "videos": [
-          {
-            "title": "The film",
-            "description": "Placeholder: say what the video shows."
-          }
-        ],
+        "problem": "A computer shop has to keep track of customers, stock, sales and repair jobs.",
+        "solution": "A database application for managing all four, with separate access for admins, sales staff and technicians. Written in C#.",
+        "link": "https://github.com/Tobinioluwa/Computerized-Digital-Computer-Repairs-Workshop",
+        "videos": [],
         "screens": []
       }
     ]
@@ -165,6 +142,62 @@
         "caption": "Placeholder photograph: street",
         "kind": "photo",
         "tone": "#2b63f0"
+      }
+    ]
+  },
+  "studio": {
+    "visible": true,
+    "navLabel": "AI studio",
+    "heading": "Made with AI",
+    "intro": "Images and videos I have generated.",
+    "items": [
+      {
+        "title": "Placeholder image one",
+        "kind": "image",
+        "shape": "portrait",
+        "tone": "#1b3fae",
+        "prompt": "Placeholder: paste the prompt you used for this image.",
+        "tool": ""
+      },
+      {
+        "title": "Placeholder video one",
+        "kind": "video",
+        "shape": "wide",
+        "tone": "#0f2466",
+        "prompt": "Placeholder: paste the prompt you used for this video.",
+        "tool": ""
+      },
+      {
+        "title": "Placeholder image two",
+        "kind": "image",
+        "shape": "square",
+        "tone": "#8fbcff",
+        "prompt": "Placeholder: paste the prompt you used for this image.",
+        "tool": ""
+      },
+      {
+        "title": "Placeholder video two",
+        "kind": "video",
+        "shape": "tall",
+        "tone": "#16306f",
+        "prompt": "Placeholder: paste the prompt you used for this video.",
+        "tool": ""
+      },
+      {
+        "title": "Placeholder image three",
+        "kind": "image",
+        "shape": "landscape",
+        "tone": "#2b63f0",
+        "prompt": "Placeholder: paste the prompt you used for this image.",
+        "tool": ""
+      },
+      {
+        "title": "Placeholder image four",
+        "kind": "image",
+        "shape": "portrait",
+        "tone": "#d3dff8",
+        "prompt": "Placeholder: paste the prompt you used for this image.",
+        "tool": ""
       }
     ]
   },
@@ -267,7 +300,9 @@
         "body": "I draw on ICT and automation to handle the work behind the scenes.",
         "tags": [
           "ICT",
-          "n8n automation"
+          "n8n automation",
+          "Software development",
+          "Embedded systems"
         ]
       }
     ]
@@ -295,11 +330,17 @@
     "heading": "Let's work together",
     "body": "Have a website, app or repeat task in mind? Tell me about it.",
     "email": "hello@example.com",
-    "links": []
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/Tobinioluwa"
+      }
+    ]
   },
   "order": [
     "work",
     "gallery",
+    "studio",
     "services",
     "about",
     "words",
