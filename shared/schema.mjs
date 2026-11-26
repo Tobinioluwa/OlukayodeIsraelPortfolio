@@ -19,7 +19,7 @@ export const SCHEMA = [
   { key: 'site', label: 'Name and search', fields: [
     text('name', 'Short name (top of every page)', 60),
     text('fullName', 'Full name', 90),
-    text('pageTitle', 'Browser tab title', 70),
+    text('pageTitle', 'Browser tab title', 80),
     long('description', 'Description shown in search results and link previews', 200),
     image('shareImage', 'Link preview image'),
   ] },
