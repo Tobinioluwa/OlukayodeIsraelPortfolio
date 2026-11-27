@@ -225,8 +225,8 @@ h2 { font: 800 clamp(1.6rem, 3.6vw, 3rem)/1.15 var(--wide); letter-spacing: -0.0
   background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%), color-mix(in srgb, var(--ink) 4%, var(--night)); }
 .panel h3 { font: 500 1.05rem var(--wide); margin-bottom: 18px; }
 .bio { grid-column: span 2; display: grid; align-content: center; gap: 16px; font-size: clamp(1.1rem, 1.8vw, 1.4rem); }
-.portrait { grid-column: span 2; grid-row: span 2; padding: 0; overflow: hidden; min-height: 360px; }
-.portrait .shot { position: absolute; inset: 0; }
+.portrait { grid-column: span 2; grid-row: span 2; padding: 0; overflow: hidden; min-height: clamp(420px, 88vh, 640px); }
+.portrait .shot { position: absolute; inset: 0; object-position: 50% 22%; }
 .fact { display: grid; align-content: end; gap: 6px; }
 .fact strong { font: 800 clamp(2rem, 4vw, 3.4rem)/1 var(--wide); color: var(--light); }
 .fact span { color: var(--soft); font-size: .95rem; }
@@ -300,6 +300,7 @@ h2 { font: 800 clamp(1.6rem, 3.6vw, 3rem)/1.15 var(--wide); letter-spacing: -0.0
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .panel { padding: 22px; }
   .bio, .portrait { grid-column: span 2; }
+  .portrait { min-height: 430px; }
 }
 
 /* Short screens: tighten up so everything still fits. */

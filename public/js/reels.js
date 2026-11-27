@@ -1,6 +1,6 @@
 // The two scroll "reels": the project wheel and the photo and video film strip.
 // Each screen has three rows (heading, moving content, controls) so nothing can overlap.
-import { projectSlugs } from '/shared/schema.mjs';
+import { projectSlugs, safeUrl } from '/shared/schema.mjs';
 import { el, picture, openViewer, shapeFrame, whenShaped } from '/js/dom.js';
 import { videoFrame } from '/js/pages.js';
 
@@ -139,6 +139,15 @@ export function workChapter(work, { scenes, isCalm }) {
 
 // ---------- photo and video film strip ----------
 
+/** The cover picture or, for an uploaded video without one, a frame from one second in. */
+function still(item) {
+  const clip = safeUrl(item.video);
+  if (item.kind !== 'video' || safeUrl(item.image) || !/\.(mp4|webm)$/i.test(clip)) return picture(item.image, '', item.tone, item.caption);
+  const frame = el('video', { class: 'shot', src: `${clip}#t=1`, preload: 'metadata', playsinline: true, tabindex: '-1', 'aria-hidden': 'true' });
+  frame.muted = true;
+  return frame;
+}
+
 export function galleryChapter(gallery, { scenes, isCalm }) {
   const items = gallery.items;
   const section = el('section', { class: 'chapter gallery reel', id: 'gallery' });
@@ -155,7 +164,7 @@ export function galleryChapter(gallery, { scenes, isCalm }) {
 
   const frames = items.map((item, i) => {
     const button = el('button', { type: 'button', class: `shot-button ${item.kind}`, 'aria-label': `${item.kind === 'video' ? 'Play' : 'View'} ${nameOf(item)}`, onclick: () => open(item) },
-      picture(item.image, '', item.tone, item.caption),
+      still(item),
       item.kind === 'video' && el('span', { class: 'play', 'aria-hidden': 'true' }),
       el('span', { class: 'viewfinder', 'aria-hidden': 'true' }));
     centreFirst(button, i, () => active, controls, isCalm);

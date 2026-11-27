@@ -4,7 +4,7 @@
     "fullName": "Olukayode Israel Oluwatobiloba",
     "pageTitle": "Tobi (Olukayode Israel Oluwatobiloba) | Designer and visual storyteller",
     "description": "Olukayode Israel Oluwatobiloba (Tobi) is a designer and visual storyteller with experience in ICT, communications, photography and videography.",
-    "shareImage": ""
+    "shareImage": "/media/link-preview.jpg"
   },
   "theme": {
     "night": "#050a16",
@@ -33,7 +33,16 @@
         "tone": "#173a9c",
         "tags": [],
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-examscavenger.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-examscavenger.jpg",
+        "imageAlt": "AI-generated illustration of a phone, magnifying glass, books and question cards"
       },
       {
         "title": "IGERI AI",
@@ -48,7 +57,16 @@
         "solution": "A chat companion that adjusts to each child’s age group, follows the Nigerian NERDC curriculum and supports Nigerian languages, with a dashboard for parents. Built with React, TypeScript and Firebase.",
         "link": "https://igeri.netlify.app/",
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-igeri.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-igeri.jpg",
+        "imageAlt": "AI-generated illustration of a child learning on a tablet beside a small AI companion"
       },
       {
         "title": "DL4All Nigeria Elections",
@@ -61,7 +79,16 @@
         "solution": "Approved voters sign in, vote once and get a receipt code. Ballots are secret and results update live, while an admin manages approvals and positions. Built with Next.js and Supabase.",
         "link": "https://dl4all-elections.vercel.app",
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-dl4all.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-dl4all.jpg",
+        "imageAlt": "AI-generated illustration of a phone, a ballot card, a ballot box and rising result bars"
       },
       {
         "title": "SignEasy",
@@ -75,7 +102,16 @@
         "solution": "An offline Nigerian Sign Language reference with everyday phrases in five categories, an A to Z fingerspelling guide and instant search. Built with Flutter.",
         "link": "https://github.com/Tobinioluwa/signEasy",
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-signeasy.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-signeasy.jpg",
+        "imageAlt": "AI-generated illustration of two people having a friendly conversation with a phone"
       },
       {
         "title": "FarmLog",
@@ -89,7 +125,16 @@
         "solution": "An offline farm diary for logging crops, growth stages, harvest dates and input costs. Built with Flutter.",
         "link": "https://github.com/Tobinioluwa/FarmLog",
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-farmlog.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-farmlog.jpg",
+        "imageAlt": "AI-generated illustration of a farmer with a phone among young maize plants"
       },
       {
         "title": "Computer Shop Management System",
@@ -103,7 +148,16 @@
         "solution": "A database application for managing all four, with separate access for admins, sales staff and technicians. Written in C#.",
         "link": "https://github.com/Tobinioluwa/Computerized-Digital-Computer-Repairs-Workshop",
         "videos": [],
-        "screens": []
+        "screens": [
+          {
+            "title": "Sample screen",
+            "description": "AI-generated sample, not the real app. A real screenshot will replace it.",
+            "image": "/media/sample-screen-computer-shop.jpg",
+            "shape": "auto"
+          }
+        ],
+        "image": "/media/cover-computer-shop.jpg",
+        "imageAlt": "AI-generated illustration of a computer repair workbench with a laptop"
       }
     ]
   },
@@ -111,44 +165,91 @@
     "visible": true,
     "navLabel": "Photo and video",
     "heading": "Through my lens",
-    "intro": "Photos and videos I have taken and edited.",
+    "intro": "Photos and videos I have taken and edited. Samples are labelled.",
     "items": [
       {
-        "caption": "YALI video",
+        "caption": "YALI video: My Period",
         "kind": "video",
+        "video": "/media/yali-video.mp4",
+        "shape": "auto",
         "tone": "#2b63f0"
       },
       {
-        "caption": "Placeholder photograph: portrait",
+        "caption": "YALI outreach photo 1",
         "kind": "photo",
-        "tone": "#1b3fae",
-        "shape": "portrait"
+        "image": "/media/yali-photo-1.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
       },
       {
-        "caption": "Placeholder video: event highlights",
+        "caption": "YALI outreach photo 2",
+        "kind": "photo",
+        "image": "/media/yali-photo-2.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "YALI outreach photo 3",
+        "kind": "photo",
+        "image": "/media/yali-photo-3.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "YALI outreach photo 4",
+        "kind": "photo",
+        "image": "/media/yali-photo-4.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "YALI outreach photo 5",
+        "kind": "photo",
+        "image": "/media/yali-photo-5.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "Sample, AI-generated: portrait",
+        "kind": "photo",
+        "image": "/media/sample-photo-portrait.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
+      },
+      {
+        "caption": "Sample, AI-generated: event highlights",
         "kind": "video",
+        "video": "/media/sample-video-event.mp4",
+        "shape": "auto",
         "tone": "#0f2466"
       },
       {
-        "caption": "Placeholder photograph: event",
+        "caption": "Sample, AI-generated: conference",
         "kind": "photo",
-        "tone": "#8fbcff"
+        "image": "/media/sample-photo-event.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
       },
       {
-        "caption": "Placeholder video: short story",
+        "caption": "Sample, AI-generated: short story",
         "kind": "video",
-        "tone": "#16306f",
-        "shape": "tall"
+        "video": "/media/sample-video-story.mp4",
+        "shape": "auto",
+        "tone": "#0f2466"
       },
       {
-        "caption": "Placeholder photograph: product",
+        "caption": "Sample, AI-generated: product",
         "kind": "photo",
-        "tone": "#d3dff8"
+        "image": "/media/sample-photo-product.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
       },
       {
-        "caption": "Placeholder photograph: street",
+        "caption": "Sample, AI-generated: street",
         "kind": "photo",
-        "tone": "#2b63f0"
+        "image": "/media/sample-photo-street.jpg",
+        "shape": "auto",
+        "tone": "#1b3fae"
       }
     ]
   },
@@ -159,52 +260,76 @@
     "intro": "Images and videos I have generated.",
     "items": [
       {
-        "title": "Placeholder image one",
+        "title": "Focus mode, after a Pinterest design",
         "kind": "image",
-        "shape": "portrait",
+        "shape": "auto",
         "tone": "#1b3fae",
-        "prompt": "Placeholder: paste the prompt you used for this image.",
-        "tool": ""
+        "prompt": "",
+        "tool": "",
+        "image": "/media/tobi-focus-mode.jpg"
       },
       {
-        "title": "Placeholder video one",
+        "title": "Future Lagos",
+        "kind": "image",
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "A futuristic Lagos skyline above calm water at blue hour.",
+        "tool": "Google Flow",
+        "image": "/media/ai-lagos.jpg"
+      },
+      {
+        "title": "City on the water",
         "kind": "video",
-        "shape": "wide",
-        "tone": "#0f2466",
-        "prompt": "Placeholder: paste the prompt you used for this video.",
-        "tool": ""
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "The camera flies slowly over a futuristic coastal city at blue hour, with glowing reflections on the water.",
+        "tool": "Google Flow",
+        "video": "/media/ai-city.mp4"
       },
       {
-        "title": "Placeholder image two",
+        "title": "Glass butterfly",
         "kind": "image",
-        "shape": "square",
-        "tone": "#8fbcff",
-        "prompt": "Placeholder: paste the prompt you used for this image.",
-        "tool": ""
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "A glass butterfly made of glowing blue light.",
+        "tool": "Google Flow",
+        "image": "/media/ai-butterfly.jpg"
       },
       {
-        "title": "Placeholder video two",
+        "title": "Productivity mode, after a Pinterest design",
+        "kind": "image",
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "",
+        "tool": "",
+        "image": "/media/tobi-productivity-mode.jpg"
+      },
+      {
+        "title": "Taking flight",
         "kind": "video",
-        "shape": "tall",
-        "tone": "#16306f",
-        "prompt": "Placeholder: paste the prompt you used for this video.",
-        "tool": ""
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "Glowing blue particles swirl together and form a butterfly that gently opens its wings.",
+        "tool": "Google Flow",
+        "video": "/media/ai-particles.mp4"
       },
       {
-        "title": "Placeholder image three",
+        "title": "Floating library",
         "kind": "image",
-        "shape": "landscape",
-        "tone": "#2b63f0",
-        "prompt": "Placeholder: paste the prompt you used for this image.",
-        "tool": ""
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "A floating island with a small library under a starry sky.",
+        "tool": "Google Flow",
+        "image": "/media/ai-island.jpg"
       },
       {
-        "title": "Placeholder image four",
+        "title": "Blue garden",
         "kind": "image",
-        "shape": "portrait",
-        "tone": "#d3dff8",
-        "prompt": "Placeholder: paste the prompt you used for this image.",
-        "tool": ""
+        "shape": "auto",
+        "tone": "#1b3fae",
+        "prompt": "A fictional astronaut standing in a field of luminous blue flowers.",
+        "tool": "Google Flow",
+        "image": "/media/ai-astronaut.jpg"
       }
     ]
   },
@@ -222,7 +347,8 @@
           "Booking sites"
         ],
         "art": "website",
-        "tone": "#2b63f0"
+        "tone": "#2b63f0",
+        "image": "/media/service-websites.jpg"
       },
       {
         "title": "Apps and user experience",
@@ -233,7 +359,8 @@
           "User testing"
         ],
         "art": "app",
-        "tone": "#10286e"
+        "tone": "#10286e",
+        "image": "/media/service-apps.jpg"
       },
       {
         "title": "Photography and videography",
@@ -245,7 +372,8 @@
           "Video editing"
         ],
         "art": "camera",
-        "tone": "#a9ccff"
+        "tone": "#a9ccff",
+        "image": "/media/service-photo-video.jpg"
       },
       {
         "title": "Communications and content",
@@ -255,7 +383,8 @@
           "Content strategy"
         ],
         "art": "story",
-        "tone": "#173a9c"
+        "tone": "#173a9c",
+        "image": "/media/service-communications.jpg"
       },
       {
         "title": "Automation with n8n",
@@ -266,7 +395,8 @@
           "Research tools"
         ],
         "art": "workflow",
-        "tone": "#081338"
+        "tone": "#081338",
+        "image": "/media/service-automation.jpg"
       }
     ]
   },
@@ -275,7 +405,7 @@
     "navLabel": "About",
     "heading": "Call me Tobi",
     "bio": "My name is Olukayode Israel Oluwatobiloba, but most people call me Tobi.\nMy experience brings together ICT, communications, design, photography and videography. They serve one goal: helping people understand an idea and use it with ease.",
-    "photo": "",
+    "photo": "/media/tobi-focus-mode.jpg",
     "skills": [],
     "facts": [],
     "experience": [],
